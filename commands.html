@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandos - MikaBot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=gg+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://cdn.discordapp.com/embed/avatars/0.png" type="image/png">
+    <style>
+        .page-content {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        .commands-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--discord-dark);
+            color: var(--discord-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--discord-blurple);
+            color: white;
+            border-color: var(--discord-blurple);
+        }
+        .commands-list {
+            display: grid;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .command-item {
+            background: var(--discord-dark);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        .command-item:hover {
+            border-color: var(--discord-blurple);
+            transform: translateX(5px);
+        }
+        .command-item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .command-item-name {
+            color: var(--discord-blurple);
+            font-family: 'Fira Code', monospace;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .command-item-desc {
+            color: var(--discord-light);
+            margin-bottom: 0.75rem;
+        }
+        .command-item-usage {
+            font-size: 0.85rem;
+            color: var(--discord-light);
+        }
+        .command-item-usage code {
+            background: var(--discord-darker);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: var(--discord-white);
+            font-family: 'Fira Code', monospace;
+        }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--discord-light);
+        }
+        .loading-spinner {
+            border: 3px solid var(--discord-darker);
+            border-top: 3px solid var(--discord-blurple);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="MikaBot" class="bot-avatar">
+                    <span class="bot-name">MikaBot</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="commands.html">Comandos</a></li>
+                <li><a href="features.html">Funcionalidades</a></li>
+            </ul>
+            <div class="nav-auth">
+                <div id="user-section" class="user-section" style="display: none;">
+                    <div class="user-info">
+                        <img id="user-avatar" src="" alt="User Avatar" class="user-avatar">
+                        <span id="user-name" class="user-name"></span>
+                    </div>
+                    <button id="dashboard-btn" class="dashboard-btn">Dashboard</button>
+                    <button id="logout-btn" class="logout-btn">Sair</button>
+                </div>
+                <button id="login-btn" class="login-btn">
+                    <img src="https://assets-global.website-files.com/6257adef93867e56f84d3101/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
+                    Login com Discord
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Commands Page Content -->
+    <div class="page-content">
+        <section>
+            <div class="section-header">
+                <h1 class="section-title">Comandos do MikaBot</h1>
+                <p class="section-subtitle">Lista completa de todos os comandos disponíveis</p>
+            </div>
+
+            <div class="commands-filter">
+                <button class="filter-btn active" data-category="all">Todos</button>
+                <button class="filter-btn" data-category="music">🎵 Música</button>
+                <button class="filter-btn" data-category="moderation">🛡️ Moderação</button>
+                <button class="filter-btn" data-category="economy">💰 Economia</button>
+                <button class="filter-btn" data-category="fun">🎮 Fun</button>
+                <button class="filter-btn" data-category="utility">📊 Utilitários</button>
+                <button class="filter-btn" data-category="config">⚙️ Config</button>
+            </div>
+
+            <div id="commands-list" class="commands-list">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando comandos...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="MikaBot" class="footer-bot-avatar">
+                <span class="footer-bot-name">MikaBot</span>
+            </div>
+            <p class="footer-tagline">O melhor bot para seu servidor - Em Breve!</p>
+            <div class="footer-links">
+                <a href="index.html">Início</a>
+                <a href="commands.html">Comandos</a>
+                <a href="features.html">Funcionalidades</a>
+            </div>
+            <p class="footer-copyright">© 2024 MikaBot. Todos os direitos reservados. Em Breve.</p>
+        </div>
+    </footer>
+
+    <!-- Coming Soon Modal -->
+    <div id="coming-soon-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-icon">🚧</div>
+            <h2>Em Breve!</h2>
+            <p>Esta funcionalidade ainda está em desenvolvimento.</p>
+            <p>Fique atento para atualizações!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Fetch commands from environment/API
+        async function fetchCommands() {
+            const commandsList = document.getElementById('commands-list');
+            
+            try {
+                // Try to fetch from API endpoint
+                const response = await fetch('/api/commands');
+                
+                if (!response.ok) {
+                    throw new Error('API not available');
+                }
+                
+                const commands = await response.json();
+                renderCommands(commands);
+            } catch (error) {
+                // Fallback: fetch from local JSON or use embedded data
+                try {
+                    const response = await fetch('commands.json');
+                    if (response.ok) {
+                        const commands = await response.json();
+                        renderCommands(commands);
+                        return;
+                    }
+                } catch (e) {}
+                
+                // Use embedded commands as fallback
+                const commands = getEmbeddedCommands();
+                renderCommands(commands);
+            }
+        }
+
+        function getEmbeddedCommands() {
+            return [
+                { name: 'play', description: 'Toca uma música do YouTube/Spotify', category: 'music', usage: '/play <música>' },
+                { name: 'skip', description: 'Pula para próxima música', category: 'music', usage: '/skip' },
+                { name: 'queue', description: 'Mostra a fila de músicas', category: 'music', usage: '/queue' },
+                { name: 'stop', description: 'Para a música e limpa a fila', category: 'music', usage: '/stop' },
+                { name: 'volume', description: 'Ajusta o volume da música', category: 'music', usage: '/volume <1-100>' },
+                { name: 'kick', description: 'Expulsa um membro do servidor', category: 'moderation', usage: '/kick <membro> [razão]' },
+                { name: 'ban', description: 'Bane um membro do servidor', category: 'moderation', usage: '/ban <membro> [razão]' },
+                { name: 'mute', description: 'Silencia um membro', category: 'moderation', usage: '/mute <membro> [tempo]' },
+                { name: 'unmute', description: 'Remove o silêncio de um membro', category: 'moderation', usage: '/unmute <membro>' },
+                { name: 'clear', description: 'Limpa mensagens do chat', category: 'moderation', usage: '/clear <quantidade>' },
+                { name: 'warn', description: 'Adverte um membro', category: 'moderation', usage: '/warn <membro> <razão>' },
+                { name: 'balance', description: 'Mostra seu saldo', category: 'economy', usage: '/balance [membro]' },
+                { name: 'daily', description: 'Receba seu prêmio diário', category: 'economy', usage: '/daily' },
+                { name: 'pay', description: 'Transfere dinheiro para outro usuário', category: 'economy', usage: '/pay <membro> <quantidade>' },
+                { name: 'shop', description: 'Abre a loja virtual', category: 'economy', usage: '/shop' },
+                { name: 'work', description: 'Trabalhe para ganhar dinheiro', category: 'economy', usage: '/work' },
+                { name: 'rob', description: 'Rouba dinheiro de outro usuário', category: 'economy', usage: '/rob <membro>' },
+                { name: 'meme', description: 'Envia um meme aleatório', category: 'fun', usage: '/meme' },
+                { name: 'duelo', description: 'Inicia um duelo com outro usuário', category: 'fun', usage: '/duelo <membro>' },
+                { name: 'quiz', description: 'Inicia um quiz', category: 'fun', usage: '/quiz' },
+                { name: '8ball', description: 'Pergunte à bola mágica', category: 'fun', usage: '/8ball <pergunta>' },
+                { name: 'say', description: 'O bot repete sua mensagem', category: 'fun', usage: '/say <mensagem>' },
+                { name: 'avatar', description: 'Mostra o avatar de um usuário', category: 'utility', usage: '/avatar [membro]' },
+                { name: 'userinfo', description: 'Mostra informações de um usuário', category: 'utility', usage: '/userinfo [membro]' },
+                { name: 'serverinfo', description: 'Mostra informações do servidor', category: 'utility', usage: '/serverinfo' },
+                { name: 'ping', description: 'Mostra o ping do bot', category: 'utility', usage: '/ping' },
+                { name: 'help', description: 'Mostra lista de comandos', category: 'utility', usage: '/help [comando]' },
+                { name: 'setup', description: 'Configura o bot no servidor', category: 'config', usage: '/setup' },
+                { name: 'prefix', description: 'Altera o prefixo do bot', category: 'config', usage: '/prefix <novo_prefixo>' },
+                { name: 'logs', description: 'Configura os logs do servidor', category: 'config', usage: '/logs <canal>' },
+                { name: 'autorole', description: 'Configura cargo automático', category: 'config', usage: '/autorole <cargo>' }
+            ];
+        }
+
+        function renderCommands(commands) {
+            const commandsList = document.getElementById('commands-list');
+            
+            if (!commands || commands.length === 0) {
+                commandsList.innerHTML = '<div class="loading"><p>Nenhum comando encontrado.</p></div>';
+                return;
+            }
+
+            commandsList.innerHTML = commands.map(cmd => `
+                <div class="command-item" data-category="${cmd.category}">
+                    <div class="command-item-header">
+                        <span class="command-item-name">/${cmd.name}</span>
+                    </div>
+                    <p class="command-item-desc">${cmd.description}</p>
+                    <p class="command-item-usage">Uso: <code>${cmd.usage}</code></p>
+                </div>
+            `).join('');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const category = btn.dataset.category;
+                const items = document.querySelectorAll('.command-item');
+                
+                items.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Load commands on page load
+        document.addEventListener('DOMContentLoaded', fetchCommands);
+    </script>
+</body>
+</html>

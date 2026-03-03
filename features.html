@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionalidades - MikaBot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=gg+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://cdn.discordapp.com/embed/avatars/0.png" type="image/png">
+    <style>
+        .page-content {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        .features-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        .category-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--discord-dark);
+            color: var(--discord-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        .category-btn:hover, .category-btn.active {
+            background: var(--discord-blurple);
+            color: white;
+            border-color: var(--discord-blurple);
+        }
+        .features-full-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .full-feature-card {
+            background: var(--discord-dark);
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .full-feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--discord-blurple);
+        }
+        .full-feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .full-feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--discord-white);
+            margin-bottom: 1rem;
+        }
+        .full-feature-description {
+            color: var(--discord-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .full-feature-commands {
+            background: var(--discord-darker);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        .full-feature-commands h5 {
+            color: var(--discord-white);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .full-feature-commands code {
+            display: inline-block;
+            background: var(--discord-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--discord-blurple);
+            margin: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="MikaBot" class="bot-avatar">
+                    <span class="bot-name">MikaBot</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="commands.html">Comandos</a></li>
+                <li><a href="features.html">Funcionalidades</a></li>
+            </ul>
+            <div class="nav-auth">
+                <div id="user-section" class="user-section" style="display: none;">
+                    <div class="user-info">
+                        <img id="user-avatar" src="" alt="User Avatar" class="user-avatar">
+                        <span id="user-name" class="user-name"></span>
+                    </div>
+                    <button id="dashboard-btn" class="dashboard-btn">Dashboard</button>
+                    <button id="logout-btn" class="logout-btn">Sair</button>
+                </div>
+                <button id="login-btn" class="login-btn">
+                    <img src="https://assets-global.website-files.com/6257adef93867e56f84d3101/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
+                    Login com Discord
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Features Page Content -->
+    <div class="page-content">
+        <section>
+            <div class="section-header">
+                <h1 class="section-title">Funcionalidades do MikaBot</h1>
+                <p class="section-subtitle">Descubra tudo o que o MikaBot pode fazer pela sua comunidade</p>
+            </div>
+
+            <div class="features-categories">
+                <button class="category-btn active" data-category="all">Todas</button>
+                <button class="category-btn" data-category="music">🎵 Música</button>
+                <button class="category-btn" data-category="economy">💰 Economia</button>
+                <button class="category-btn" data-category="moderation">🛡️ Moderação</button>
+                <button class="category-btn" data-category="automation">🤖 Automação</button>
+                <button class="category-btn" data-category="dashboard">🌐 Dashboard</button>
+            </div>
+
+            <div class="features-full-grid" id="features-grid">
+                <!-- Features will be loaded dynamically -->
+                <div class="full-feature-card" data-category="music">
+                    <div class="full-feature-icon">🎵</div>
+                    <h3 class="full-feature-title">Sistema de Música Avançado</h3>
+                    <p class="full-feature-description">Reproduza músicas do YouTube, Spotify, SoundCloud e outras plataformas com qualidade premium. Suporte a filas, playlists, loops e muito mais.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/play</code><code>/skip</code><code>/queue</code><code>/pause</code><code>/volume</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="economy">
+                    <div class="full-feature-icon">💰</div>
+                    <h3 class="full-feature-title">Sistema de Economia Completo</h3>
+                    <p class="full-feature-description">Sistema de economia virtual com bancos, trabalhos, lojas, investimentos e economia dinâmica. Seus membros podem ganhar, gastar e acumular dinheiro.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/balance</code><code>/daily</code><code>/work</code><code>/shop</code><code>/pay</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="economy">
+                    <div class="full-feature-icon">🏆</div>
+                    <h3 class="full-feature-title">Loja e Itens Cosméticos</h3>
+                    <p class="full-feature-description">Loja virtual com itens cosméticos, badges, títulos exclusivos e skins para perfis. Sistema de inventário e trocas entre usuários.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/shop</code><code>/inventory</code><code>/buy</code><code>/sell</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="moderation">
+                    <div class="full-feature-icon">🛡️</div>
+                    <h3 class="full-feature-title">Moderação Avançada</h3>
+                    <p class="full-feature-description">Ferramentas poderosas de moderação: auto-mod, filtros de palavras, logs detalhados, sistema de warns, timeouts automáticos e muito mais.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/kick</code><code>/ban</code><code>/mute</code><code>/warn</code><code>/clear</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="moderation">
+                    <div class="full-feature-icon">📝</div>
+                    <h3 class="full-feature-title">Sistema de Tickets</h3>
+                    <p class="full-feature-description">Sistema completo de tickets para suporte ao cliente. Criação automática de tickets, categorias, prioridades e transferências entre departamentos.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/ticket</code><code>/close</code><code>/setup</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="automation">
+                    <div class="full-feature-icon">🤖</div>
+                    <h3 class="full-feature-title">IA e Chatbots</h3>
+                    <p class="full-feature-description">Integração com inteligência artificial avançada. Chatbots personalizáveis, respostas automáticas e assistentes virtuais para sua comunidade.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/ai</code><code>/chatbot</code><code>/automod</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="automation">
+                    <div class="full-feature-icon">📅</div>
+                    <h3 class="full-feature-title">Eventos Automáticos</h3>
+                    <p class="full-feature-description">Crie eventos, sorteios e giveaways automaticamente. Sistema de inscrição, notificações e rewards automáticos para participantes.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/evento</code><code>/sorteio</code><code>/giveaway</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="automation">
+                    <div class="full-feature-icon">📢</div>
+                    <h3 class="full-feature-title">Sistema de Anúncios</h3>
+                    <p class="full-feature-description">Anúncios automáticos com embed, agendamento de mensagens, canais de notícias e muito mais para manter sua comunidade informada.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/anunciar</code><code>/embed</code><code>/agendar</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="dashboard">
+                    <div class="full-feature-icon">🌐</div>
+                    <h3 class="full-feature-title">Dashboard Web Completa</h3>
+                    <p class="full-feature-description">Painel web moderno para gerenciar seu servidor de qualquer lugar. Estatísticas, configurações, logs e muito mais em uma interface intuitiva.</p>
+                    <div class="full-feature-commands">
+                        <h5>Acesso</h5>
+                        <code>dashboard.mikabot.com</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="dashboard">
+                    <div class="full-feature-icon">📊</div>
+                    <h3 class="full-feature-title">Estatísticas Detalhadas</h3>
+                    <p class="full-feature-description">Métricas completas do servidor: membros ativos, mensagens, comandos usados, logs de moderação e gráficos interativos.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/stats</code><code>/leaderboard</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="music">
+                    <div class="full-feature-icon">📺</div>
+                    <h3 class="full-feature-title">Rádio e Streams</h3>
+                    <p class="full-feature-description">Ouça rádios online, streams ao vivo e misture playlists personalizadas. Suporte a múltiplos formatos de áudio.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/radio</code><code>/stream</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+
+                <div class="full-feature-card" data-category="moderation">
+                    <div class="full-feature-icon">🔒</div>
+                    <h3 class="full-feature-title">Sistema de Verificação</h3>
+                    <p class="full-feature-description">Verificação de membros com CAPTCHA, cargos por reação, formulários customizados e muito mais para proteger seu servidor.</p>
+                    <div class="full-feature-commands">
+                        <h5>Comandos Relacionados</h5>
+                        <code>/verify</code><code>/setup</code>
+                    </div>
+                    <span class="coming-soon-badge">Em Breve</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="MikaBot" class="footer-bot-avatar">
+                <span class="footer-bot-name">MikaBot</span>
+            </div>
+            <p class="footer-tagline">O melhor bot para seu servidor - Em Breve!</p>
+            <div class="footer-links">
+                <a href="index.html">Início</a>
+                <a href="commands.html">Comandos</a>
+                <a href="features.html">Funcionalidades</a>
+            </div>
+            <p class="footer-copyright">© 2024 MikaBot. Todos os direitos reservados. Em Breve.</p>
+        </div>
+    </footer>
+
+    <!-- Coming Soon Modal -->
+    <div id="coming-soon-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-icon">🚧</div>
+            <h2>Em Breve!</h2>
+            <p>Esta funcionalidade ainda está em desenvolvimento.</p>
+            <p>Fique atento para atualizações!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Filter functionality for features
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const category = btn.dataset.category;
+                const items = document.querySelectorAll('.full-feature-card');
+                
+                items.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Coming soon badges click
+        document.querySelectorAll('.coming-soon-badge').forEach(badge => {
+            badge.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.getElementById('coming-soon-modal').classList.add('show');
+            });
+        });
+    </script>
+</body>
+</html>

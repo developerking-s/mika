@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MikaBot - Seu Bot de Discord</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=gg+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://cdn.discordapp.com/embed/avatars/0.png" type="image/png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="MikaBot" class="bot-avatar">
+                <span class="bot-name">MikaBot</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="commands.html">Comandos</a></li>
+                <li><a href="features.html">Funcionalidades</a></li>
+            </ul>
+            <div class="nav-auth">
+                <div id="user-section" class="user-section" style="display: none;">
+                    <div class="user-info">
+                        <img id="user-avatar" src="" alt="User Avatar" class="user-avatar">
+                        <span id="user-name" class="user-name"></span>
+                    </div>
+                    <button id="dashboard-btn" class="dashboard-btn">Dashboard</button>
+                    <button id="logout-btn" class="logout-btn">Sair</button>
+                </div>
+                <button id="login-btn" class="login-btn">
+                    <img src="https://assets-global.website-files.com/6257adef93867e56f84d3101/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
+                    Login com Discord
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">EM BREVE</div>
+            <h1 class="hero-title">MikaBot</h1>
+            <p class="hero-subtitle">O bot perfeito para seu servidor do Discord</p>
+            <p class="hero-description">Traga moderação avançada, música, economia e muito mais para sua comunidade com MikaBot!</p>
+            <div class="hero-buttons">
+                <a href="#funcionalidades" class="btn-primary">Ver Funcionalidades</a>
+                <a href="#comandos" class="btn-secondary">Ver Comandos</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">Em Breve</span>
+                    <span class="stat-label">Servidores</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Em Breve</span>
+                    <span class="stat-label">Usuários</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Em Breve</span>
+                    <span class="stat-label">Comandos</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="MikaBot" class="bot-showcase">
+        </div>
+    </section>
+
+    <!-- Commands Section (Link to full page) -->
+    <section id="comandos" class="commands">
+        <div class="section-header">
+            <h2 class="section-title">Comandos</h2>
+            <p class="section-subtitle">Explore todos os comandos disponíveis do MikaBot</p>
+            <a href="commands.html" class="btn-primary" style="display: inline-block; margin-top: 1rem;">Ver Todos os Comandos</a>
+        </div>
+        <div class="commands-grid">
+            <div class="command-card">
+                <div class="command-icon">🎵</div>
+                <h3 class="command-name">Música</h3>
+                <p class="command-description">Toque suas músicas favoritas com alta qualidade</p>
+                <div class="command-examples">
+                    <code>/play</code>
+                    <code>/skip</code>
+                    <code>/queue</code>
+                </div>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="command-card">
+                <div class="command-icon">🛡️</div>
+                <h3 class="command-name">Moderação</h3>
+                <p class="command-description">Ferramentas poderosas para moderar seu servidor</p>
+                <div class="command-examples">
+                    <code>/kick</code>
+                    <code>/ban</code>
+                    <code>/mute</code>
+                </div>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="command-card">
+                <div class="command-icon">💰</div>
+                <h3 class="command-name">Economia</h3>
+                <p class="command-description">Sistema completo de economia virtual</p>
+                <div class="command-examples">
+                    <code>/daily</code>
+                    <code>/balance</code>
+                    <code>/shop</code>
+                </div>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="command-card">
+                <div class="command-icon">🎮</div>
+                <h3 class="command-name">Entretenimento</h3>
+                <p class="command-description">Jogos e diversões para sua comunidade</p>
+                <div class="command-examples">
+                    <code>/duelo</code>
+                    <code>/quiz</code>
+                    <code>/meme</code>
+                </div>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="command-card">
+                <div class="command-icon">📊</div>
+                <h3 class="command-name">Utilitários</h3>
+                <p class="command-description">Comandos úteis do dia a dia</p>
+                <div class="command-examples">
+                    <code>/avatar</code>
+                    <code>/serverinfo</code>
+                    <code>/userinfo</code>
+                </div>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="command-card">
+                <div class="command-icon">⚙️</div>
+                <h3 class="command-name">Configuração</h3>
+                <p class="command-description">Configure o bot do seu jeito</p>
+                <div class="command-examples">
+                    <code>/setup</code>
+                    <code>/prefix</code>
+                    <code>/logs</code>
+                </div>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section (Link to full page) -->
+    <section id="funcionalidades" class="features">
+        <div class="section-header">
+            <h2 class="section-title">Funcionalidades</h2>
+            <p class="section-subtitle">Descubra tudo o que o MikaBot pode fazer por você</p>
+            <a href="features.html" class="btn-primary" style="display: inline-block; margin-top: 1rem;">Ver Todas as Funcionalidades</a>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3 class="feature-title">Sistema de Música</h3>
+                <p class="feature-description">Reproduza músicas do YouTube, Spotify e muito mais com qualidade premium e zero latência.</p>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">IA Avançada</h3>
+                <p class="feature-description">Integração com inteligência artificial para chats inteligentes e automações.</p>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3 class="feature-title">Leveling System</h3>
+                <p class="feature-description">Sistema de níveis eXP para engajar membros do seu servidor.</p>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎉</div>
+                <h3 class="feature-title">Eventos Automáticos</h3>
+                <p class="feature-description">Crie eventos, sorteios e giveaways automaticamente.</p>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎫</div>
+                <h3 class="feature-title">Sistema de Tickets</h3>
+                <p class="feature-description">Sistema de tickets moderno para suporte ao cliente.</p>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3 class="feature-title">Dashboard Web</h3>
+                <p class="feature-description">Gerencie seu servidor de qualquer lugar com nosso painel web.</p>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3 class="feature-title">Chatbots Personalizáveis</h3>
+                <p class="feature-description">Crie chatbots customizados com respostas automáticas.</p>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3 class="feature-title">Notificações</h3>
+                <p class="feature-description">Receba alertas de Twitch, YouTube e outras plataformas.</p>
+                <span class="coming-soon-badge">Em Breve</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview Section -->
+    <section class="dashboard-preview">
+        <div class="section-header">
+            <h2 class="section-title">Dashboard</h2>
+            <p class="section-subtitle">Gerencie seu servidor de forma fácil e intuitiva</p>
+        </div>
+        <div class="dashboard-content">
+            <div class="dashboard-preview-image">
+                <div class="preview-placeholder">
+                    <span>Preview da Dashboard</span>
+                    <p>Em Breve</p>
+                </div>
+            </div>
+            <div class="dashboard-features">
+                <div class="dash-feature">
+                    <h4>📊 Estatísticas</h4>
+                    <p>Visualize métricas detalhadas do seu servidor</p>
+                </div>
+                <div class="dash-feature">
+                    <h4>⚙️ Configurações</h4>
+                    <p>Alene todas as configurações do bot facilmente</p>
+                </div>
+                <div class="dash-feature">
+                    <h4>👥 Gerenciamento</h4>
+                    <p>Gerencie membros e permissões</p>
+                </div>
+                <div class="dash-feature">
+                    <h4>🎛️ Controles</h4>
+                    <p>Controle música e automações</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="MikaBot" class="footer-bot-avatar">
+                <span class="footer-bot-name">MikaBot</span>
+            </div>
+            <p class="footer-tagline">O melhor bot para seu servidor - Em Breve!</p>
+            <div class="footer-links">
+                <a href="index.html">Início</a>
+                <a href="commands.html">Comandos</a>
+                <a href="features.html">Funcionalidades</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-link">Discord</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">GitHub</a>
+            </div>
+            <p class="footer-copyright">© 2024 MikaBot. Todos os direitos reservados. Em Breve.</p>
+        </div>
+    </footer>
+
+    <!-- Coming Soon Modal -->
+    <div id="coming-soon-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-icon">🚧</div>
+            <h2>Em Breve!</h2>
+            <p>Esta funcionalidade ainda está em desenvolvimento.</p>
+            <p>Fique atento para atualizações!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
